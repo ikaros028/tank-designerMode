@@ -1,4 +1,4 @@
-package com.ika.mashibing;
+package com.ika.mashibing.DAY01;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -15,7 +15,7 @@ public class DAY01_Frame {
         f.setResizable(true);
         // 设置标题
         f.setTitle("tank war");
-        // 设置窗口监听器
+        // 设置窗口监听器，重写关闭窗口的方法
         f.addWindowListener(new WindowAdapter() {
             /**
              * 窗口关闭事件
@@ -29,5 +29,11 @@ public class DAY01_Frame {
         // 显示窗口
         f.setVisible(true);
 
+
+        // 创建继承了Frame的用户自定义窗口对象
+        DAY01_TankFrame user_T = new DAY01_TankFrame();
+        user_T.setVisible(true);
+        user_T.setVisible(false);
+        user_T.setVisible(true);
     }
 }
