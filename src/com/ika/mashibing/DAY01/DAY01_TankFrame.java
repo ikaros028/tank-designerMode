@@ -9,6 +9,16 @@ import java.awt.event.WindowEvent;
 public class DAY01_TankFrame extends Frame {
     private int x;
     private int y;
+
+    // 通过开关，允许同时执行开事件
+    /** 左移开关 */
+    private boolean left = false;
+    /** 右移开关 */
+    private boolean right = false;
+    /** 上移开关 */
+    private boolean up = false;
+    /** 下移开关 */
+    private boolean down = false;
     public DAY01_TankFrame() {
         setSize(800, 600);
         setResizable(false);
@@ -21,11 +31,15 @@ public class DAY01_TankFrame extends Frame {
              */
             @Override
             public void windowClosing(WindowEvent e) {
-                System.exit(0);
+                closeWindow();
             }
         });
         // 添加按键监听事件，键盘触发变化事件
         addKeyListener(new myKeyListener());
+    }
+
+    private void closeWindow() {
+        System.exit(0);
     }
 
     /**
@@ -39,8 +53,52 @@ public class DAY01_TankFrame extends Frame {
          */
         @Override
         public void keyPressed(KeyEvent e) {
-            System.out.println("the key was pressed : " + e.getKeyCode());
-            x += 20;
+//            System.out.println("the key was pressed : " + e.getKeyCode());
+//            // 判断按键，分发事件，仅能执行单一按键事件
+//            switch (e.getKeyCode()) {
+//                case KeyEvent.VK_LEFT:
+//                    x += 10;
+//                    break;
+//                case KeyEvent.VK_RIGHT:
+//                    x -= 10;
+//                    break;
+//                case KeyEvent.VK_UP:
+//                    break;
+//                case KeyEvent.VK_DOWN:
+//                    break;
+//                default:
+//                    break;
+//            }
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_LEFT:
+                    left = true;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    right = true;
+                    break;
+                case KeyEvent.VK_UP:
+                    up = true;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    down = true;
+                    break;
+                case KeyEvent.VK_ESCAPE:
+                    closeWindow();
+                default:
+                    break;
+            }
+            if (left) {
+                x -= 10;
+            }
+            if (right) {
+                x += 10;
+            }
+            if (up) {
+                y -= 10;
+            }
+            if (down) {
+                y += 10;
+            }
             // 调用重绘方法，由重绘方法调用paint
             repaint();
         }
@@ -52,8 +110,24 @@ public class DAY01_TankFrame extends Frame {
          */
         @Override
         public void keyReleased(KeyEvent e) {
-            System.out.println("the key was release : " + e.getKeyCode());
+//            System.out.println("the key was release : " + e.getKeyCode());
 
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_LEFT:
+                    left = false;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    right = false;
+                    break;
+                case KeyEvent.VK_UP:
+                    up = false;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    down = false;
+                    break;
+                default:
+                    break;
+            }
         }
     }
     /**
@@ -62,12 +136,7 @@ public class DAY01_TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        System.out.println("I'm painting the window");
-        // 填充指定位置
-//        g.fillRect(200, 200, 50, 50);
         // 改变坐标
         g.fillRect(x, y, 50, 50);
-        x += 10;
-        y += 10;
     }
 }
