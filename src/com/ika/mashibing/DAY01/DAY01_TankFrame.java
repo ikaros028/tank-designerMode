@@ -9,7 +9,8 @@ import java.awt.event.WindowEvent;
 public class DAY01_TankFrame extends Frame {
     private int x;
     private int y;
-
+    DAY02_Dir dir = DAY02_Dir.DOWN;
+    final int speed = 10;
     // 通过开关，允许同时执行开事件
     /** 左移开关 */
     private boolean left = false;
@@ -36,10 +37,6 @@ public class DAY01_TankFrame extends Frame {
         });
         // 添加按键监听事件，键盘触发变化事件
         addKeyListener(new myKeyListener());
-    }
-
-    private void closeWindow() {
-        System.exit(0);
     }
 
     /**
@@ -87,20 +84,8 @@ public class DAY01_TankFrame extends Frame {
                 default:
                     break;
             }
-            if (left) {
-                x -= 10;
-            }
-            if (right) {
-                x += 10;
-            }
-            if (up) {
-                y -= 10;
-            }
-            if (down) {
-                y += 10;
-            }
-            // 调用重绘方法，由重绘方法调用paint
-            repaint();
+            setMainTankDir();
+//            move("press " + KeyEvent.getKeyText(e.getKeyCode()));
         }
 
         /**
@@ -111,7 +96,6 @@ public class DAY01_TankFrame extends Frame {
         @Override
         public void keyReleased(KeyEvent e) {
 //            System.out.println("the key was release : " + e.getKeyCode());
-
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
                     left = false;
@@ -128,8 +112,25 @@ public class DAY01_TankFrame extends Frame {
                 default:
                     break;
             }
+            setMainTankDir();
+//            move("release " + KeyEvent.getKeyText(e.getKeyCode()));
         }
     }
+    private void setMainTankDir() {
+        if (left) {
+            dir = DAY02_Dir.LEFT;
+        }
+        if (up) {
+            dir = DAY02_Dir.UP;
+        }
+        if (right) {
+            dir = DAY02_Dir.RIGHT;
+        }
+        if (down) {
+            dir = DAY02_Dir.DOWN;
+        }
+    }
+
     /**
      * 重写窗口绘制方法，当窗口初次展示或再次展示时，会执行当前方法
      * @param g
@@ -138,5 +139,44 @@ public class DAY01_TankFrame extends Frame {
     public void paint(Graphics g) {
         // 改变坐标
         g.fillRect(x, y, 50, 50);
+        switch (dir) {
+            case LEFT:
+                x -= speed;
+                break;
+            case UP:
+                y -= speed;
+                break;
+            case RIGHT:
+                x += speed;
+                break;
+            case DOWN:
+                y += speed;
+                break;
+        }
+    }
+
+    /**
+     * 关闭窗口，退出程序
+     */
+    private void closeWindow() {
+        System.exit(0);
+    }
+
+    private void move(String msg) {
+        System.out.println(msg + ": " + left + ", " + right + ", " + up + ", " + down);
+        if (left) {
+            x -= 10;
+        }
+        if (right) {
+            x += 10;
+        }
+        if (up) {
+            y -= 10;
+        }
+        if (down) {
+            y += 10;
+        }
+        // 调用重绘方法，由重绘方法调用paint
+        repaint();
     }
 }
