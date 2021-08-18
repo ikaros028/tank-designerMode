@@ -49,10 +49,9 @@ public class Tank {
         }
     }
 
-    public void shoot() {
-
+    public Bullet fire() {
+        return new Bullet(this.x, this.y, this.dir);
     }
-
     public int getX() {
         return x;
     }
@@ -84,4 +83,5 @@ public class Tank {
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
+
 }

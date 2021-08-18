@@ -8,14 +8,15 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TankFrame extends Frame {
     private int x;
     private int y;
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-
+    List<Bullet> bullets = new ArrayList<Bullet>();
     Tank tank = new Tank(200,200, Dir.DOWN);
-    Bullet bul = new Bullet(300, 300, Dir.DOWN);
 
     // 通过开关，允许同时执行开事件
     /** 左移开关 */
@@ -65,6 +66,23 @@ public class TankFrame extends Frame {
         gOffScreen.setColor(c);
         paint(gOffScreen);
         g.drawImage(offscreenImg, 0,0, null);
+    }
+
+    /**
+     * 重写窗口绘制方法，当窗口初次展示或再次展示时，会执行当前方法
+     * @param g
+     */
+    @Override
+    public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("子弹的数量：" + bullets.size(), 10, 60);
+        g.setColor(c);
+        tank.paint(g);
+        for (Bullet b : bullets) {
+            b.paint(g);
+        }
+
     }
 
     /**
@@ -121,6 +139,9 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_DOWN:
                     down = false;
                     break;
+                case KeyEvent.VK_CONTROL:
+                    bullets.add(tank.fire());
+                    break;
                 default:
                     break;
             }
@@ -145,17 +166,6 @@ public class TankFrame extends Frame {
         if (down) {
             tank.setDir(Dir.DOWN);
         }
-
-    }
-
-    /**
-     * 重写窗口绘制方法，当窗口初次展示或再次展示时，会执行当前方法
-     * @param g
-     */
-    @Override
-    public void paint(Graphics g) {
-        tank.paint(g);
-        bul.paint(g);
 
     }
 
