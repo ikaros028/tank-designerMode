@@ -1,5 +1,6 @@
 package com.ika.mashibing.DAY01;
 
+import com.ika.mashibing.DAY01.bean.Bullet;
 import com.ika.mashibing.DAY01.bean.Tank;
 
 import java.awt.*;
@@ -8,13 +9,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class DAY01_TankFrame extends Frame {
+public class TankFrame extends Frame {
     private int x;
     private int y;
-    DAY02_Dir dir = DAY02_Dir.DOWN;
-    final int speed = 10;
 
-    Tank tank = new Tank(0,0, dir);
+    Tank tank = new Tank(200,200, Dir.DOWN);
+    Bullet bul = new Bullet(300, 300, Dir.DOWN);
 
     // 通过开关，允许同时执行开事件
     /** 左移开关 */
@@ -25,7 +25,7 @@ public class DAY01_TankFrame extends Frame {
     private boolean up = false;
     /** 下移开关 */
     private boolean down = false;
-    public DAY01_TankFrame() {
+    public TankFrame() {
         setSize(800, 600);
         setResizable(false);
         setTitle("u_tank war");
@@ -111,16 +111,16 @@ public class DAY01_TankFrame extends Frame {
             tank.setMoving(true);
         }
         if (left) {
-            tank.setDir(DAY02_Dir.LEFT);
+            tank.setDir(Dir.LEFT);
         }
         if (up) {
-            tank.setDir(DAY02_Dir.UP);
+            tank.setDir(Dir.UP);
         }
         if (right) {
-            tank.setDir(DAY02_Dir.RIGHT);
+            tank.setDir(Dir.RIGHT);
         }
         if (down) {
-            tank.setDir(DAY02_Dir.DOWN);
+            tank.setDir(Dir.DOWN);
         }
 
     }
@@ -132,6 +132,8 @@ public class DAY01_TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         tank.paint(g);
+        bul.paint(g);
+
     }
 
     /**

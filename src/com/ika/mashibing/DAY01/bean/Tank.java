@@ -1,6 +1,6 @@
 package com.ika.mashibing.DAY01.bean;
 
-import com.ika.mashibing.DAY01.DAY02_Dir;
+import com.ika.mashibing.DAY01.Dir;
 
 import java.awt.*;
 
@@ -9,11 +9,11 @@ import java.awt.*;
  */
 public class Tank {
     private int x, y;
-    private DAY02_Dir dir = DAY02_Dir.DOWN;
-    private static final int SPEED = 10;
+    private Dir dir = Dir.DOWN;
+    private static final int SPEED = 5;
     private boolean moving = false;
 
-    public Tank(int x, int y, DAY02_Dir dir) {
+    public Tank(int x, int y, Dir dir) {
         super();
         this.x = x;
         this.y = y;
@@ -62,11 +62,11 @@ public class Tank {
         this.y = y;
     }
 
-    public DAY02_Dir getDir() {
+    public Dir getDir() {
         return dir;
     }
 
-    public void setDir(DAY02_Dir dir) {
+    public void setDir(Dir dir) {
         this.dir = dir;
     }
 
