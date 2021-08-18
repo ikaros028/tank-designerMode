@@ -14,7 +14,7 @@ import java.util.List;
 public class TankFrame extends Frame {
     private int x;
     private int y;
-    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     List<Bullet> bullets = new ArrayList<Bullet>();
     Tank tank = new Tank(200,200, Dir.DOWN);
 
@@ -79,8 +79,12 @@ public class TankFrame extends Frame {
         g.drawString("子弹的数量：" + bullets.size(), 10, 60);
         g.setColor(c);
         tank.paint(g);
-        for (Bullet b : bullets) {
-            b.paint(g);
+        for (int i = 0; i < bullets.size(); i++) {
+            if (bullets.get(i).isLive()) {
+                bullets.get(i).paint(g);
+            } else {
+                bullets.remove(i);
+            }
         }
 
     }
