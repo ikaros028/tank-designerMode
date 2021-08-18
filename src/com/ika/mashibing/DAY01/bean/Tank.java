@@ -11,6 +11,7 @@ public class Tank {
     private int x, y;
     private DAY02_Dir dir = DAY02_Dir.DOWN;
     private static final int SPEED = 10;
+    private boolean moving = false;
 
     public Tank(int x, int y, DAY02_Dir dir) {
         super();
@@ -22,6 +23,13 @@ public class Tank {
     public void paint(Graphics g) {
         // 改变坐标
         g.fillRect(x, y, 50, 50);
+        this.move();
+    }
+
+    private void move() {
+        if (!moving) {
+            return;
+        }
         switch (dir) {
             case LEFT:
                 x -= SPEED;
@@ -60,5 +68,13 @@ public class Tank {
 
     public void setDir(DAY02_Dir dir) {
         this.dir = dir;
+    }
+
+    public boolean isMoving() {
+        return moving;
+    }
+
+    public void setMoving(boolean moving) {
+        this.moving = moving;
     }
 }

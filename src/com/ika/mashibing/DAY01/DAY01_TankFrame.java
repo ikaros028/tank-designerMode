@@ -105,6 +105,11 @@ public class DAY01_TankFrame extends Frame {
         }
     }
     private void setMainTankDir() {
+        if (!left && !up && !right && !down) {
+            tank.setMoving(false);
+        } else {
+            tank.setMoving(true);
+        }
         if (left) {
             tank.setDir(DAY02_Dir.LEFT);
         }
@@ -117,6 +122,7 @@ public class DAY01_TankFrame extends Frame {
         if (down) {
             tank.setDir(DAY02_Dir.DOWN);
         }
+
     }
 
     /**
