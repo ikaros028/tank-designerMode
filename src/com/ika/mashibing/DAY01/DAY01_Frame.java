@@ -11,16 +11,16 @@ public class DAY01_Frame {
         DAY01_TankFrame user_T = new DAY01_TankFrame();
         user_T.setVisible(true);
 
-//        // 通过循环调用，产生自动变化
-//        while (true) {
-//            // 线程停歇100ms
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            user_T.repaint();
-//        }
+        // 通过循环调用，产生自动变化
+        while (true) {
+            // 线程停歇100ms
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            user_T.repaint();
+        }
 
     }
 }

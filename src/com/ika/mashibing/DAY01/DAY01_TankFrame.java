@@ -1,5 +1,7 @@
 package com.ika.mashibing.DAY01;
 
+import com.ika.mashibing.DAY01.bean.Tank;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -11,6 +13,9 @@ public class DAY01_TankFrame extends Frame {
     private int y;
     DAY02_Dir dir = DAY02_Dir.DOWN;
     final int speed = 10;
+
+    Tank tank = new Tank(0,0, dir);
+
     // 通过开关，允许同时执行开事件
     /** 左移开关 */
     private boolean left = false;
@@ -50,22 +55,6 @@ public class DAY01_TankFrame extends Frame {
          */
         @Override
         public void keyPressed(KeyEvent e) {
-//            System.out.println("the key was pressed : " + e.getKeyCode());
-//            // 判断按键，分发事件，仅能执行单一按键事件
-//            switch (e.getKeyCode()) {
-//                case KeyEvent.VK_LEFT:
-//                    x += 10;
-//                    break;
-//                case KeyEvent.VK_RIGHT:
-//                    x -= 10;
-//                    break;
-//                case KeyEvent.VK_UP:
-//                    break;
-//                case KeyEvent.VK_DOWN:
-//                    break;
-//                default:
-//                    break;
-//            }
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
                     left = true;
@@ -113,21 +102,20 @@ public class DAY01_TankFrame extends Frame {
                     break;
             }
             setMainTankDir();
-//            move("release " + KeyEvent.getKeyText(e.getKeyCode()));
         }
     }
     private void setMainTankDir() {
         if (left) {
-            dir = DAY02_Dir.LEFT;
+            tank.setDir(DAY02_Dir.LEFT);
         }
         if (up) {
-            dir = DAY02_Dir.UP;
+            tank.setDir(DAY02_Dir.UP);
         }
         if (right) {
-            dir = DAY02_Dir.RIGHT;
+            tank.setDir(DAY02_Dir.RIGHT);
         }
         if (down) {
-            dir = DAY02_Dir.DOWN;
+            tank.setDir(DAY02_Dir.DOWN);
         }
     }
 
@@ -137,22 +125,7 @@ public class DAY01_TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        // 改变坐标
-        g.fillRect(x, y, 50, 50);
-        switch (dir) {
-            case LEFT:
-                x -= speed;
-                break;
-            case UP:
-                y -= speed;
-                break;
-            case RIGHT:
-                x += speed;
-                break;
-            case DOWN:
-                y += speed;
-                break;
-        }
+        tank.paint(g);
     }
 
     /**
