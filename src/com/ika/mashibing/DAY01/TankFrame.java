@@ -12,6 +12,7 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
     private int x;
     private int y;
+    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
     Tank tank = new Tank(200,200, Dir.DOWN);
     Bullet bul = new Bullet(300, 300, Dir.DOWN);
@@ -26,7 +27,7 @@ public class TankFrame extends Frame {
     /** 下移开关 */
     private boolean down = false;
     public TankFrame() {
-        setSize(800, 600);
+        setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(false);
         setTitle("u_tank war");
         // 内部类监听
@@ -42,6 +43,28 @@ public class TankFrame extends Frame {
         });
         // 添加按键监听事件，键盘触发变化事件
         addKeyListener(new myKeyListener());
+    }
+
+    Image offscreenImg = null;
+    /**
+     * 利用双缓存解决刷新闪烁问题
+     * 将变化先由gOffScreen画笔绘制到内存中的offscreenImg图片上，最后让画笔直接用g画笔画出整张图片
+     * 避免绘制多个点中途刷新未定位置的对象，引起闪烁问题
+     * repaint方法原本会先调用update、再调用paint方法，重写后在update中绘制完毕多点对象到图像后，再调paint一口气绘制图像
+     * @param g
+     */
+    @Override
+    public void update(Graphics g) {
+        if (offscreenImg == null) {
+            offscreenImg = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+        }
+        Graphics gOffScreen = offscreenImg.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0,0,GAME_WIDTH, GAME_HEIGHT);
+        gOffScreen.setColor(c);
+        paint(gOffScreen);
+        g.drawImage(offscreenImg, 0,0, null);
     }
 
     /**

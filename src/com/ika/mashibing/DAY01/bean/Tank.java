@@ -21,8 +21,11 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.YELLOW);
         // 改变坐标
         g.fillRect(x, y, 50, 50);
+        g.setColor(c);
         this.move();
     }
 
@@ -44,6 +47,10 @@ public class Tank {
                 y += SPEED;
                 break;
         }
+    }
+
+    public void shoot() {
+
     }
 
     public int getX() {
