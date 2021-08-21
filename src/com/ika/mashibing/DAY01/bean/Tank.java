@@ -1,8 +1,11 @@
 package com.ika.mashibing.DAY01.bean;
 
 import com.ika.mashibing.DAY01.Dir;
+import com.ika.mashibing.DAY01.ResourceMgr;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * 将坦克对象单独封装
@@ -10,6 +13,7 @@ import java.awt.*;
 public class Tank {
     private int x, y;
     private Dir dir = Dir.DOWN;
+    private BufferedImage tankImg = null;
     private static final int SPEED = 5;
     private boolean moving = false;
 
@@ -17,15 +21,13 @@ public class Tank {
         super();
         this.x = x;
         this.y = y;
-        this.dir = dir;
+        setDir(dir);
     }
 
     public void paint(Graphics g) {
         Color c = g.getColor();
-        g.setColor(Color.YELLOW);
-        // 改变坐标
-        g.fillRect(x, y, 50, 50);
-        g.setColor(c);
+        // 绘制坦克图片
+        g.drawImage(tankImg, x, y, null);
         this.move();
     }
 
@@ -74,6 +76,20 @@ public class Tank {
 
     public void setDir(Dir dir) {
         this.dir = dir;
+        switch (dir) {
+            case LEFT: setTankImg(ResourceMgr.tankL);break;
+            case UP: setTankImg(ResourceMgr.tankU);break;
+            case RIGHT: setTankImg(ResourceMgr.tankR);break;
+            case DOWN: setTankImg(ResourceMgr.tankD);break;
+        }
+    }
+
+    public BufferedImage getTankImg() {
+        return tankImg;
+    }
+
+    public void setTankImg(BufferedImage tankImg) {
+        this.tankImg = tankImg;
     }
 
     public boolean isMoving() {

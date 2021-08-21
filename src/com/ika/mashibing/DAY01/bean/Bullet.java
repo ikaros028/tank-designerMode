@@ -1,15 +1,17 @@
 package com.ika.mashibing.DAY01.bean;
 
 import com.ika.mashibing.DAY01.Dir;
+import com.ika.mashibing.DAY01.ResourceMgr;
 import com.ika.mashibing.DAY01.TankFrame;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Bullet {
     private static final int SPEED = 20;
     private static final int WIDTH = 5;
     private static final int HEIGHT = 5;
-
+    private static BufferedImage bullImg = null;
     private TankFrame tf = null;
     private boolean live = true;
     private int x,y;
@@ -18,15 +20,12 @@ public class Bullet {
     public Bullet(int x, int y, Dir dir) {
         this.x = x;
         this.y = y;
-        this.dir = dir;
-//        this.tf = tankF;
+        setDir(dir);
     }
 
     public void paint(Graphics g) {
         Color c = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(x, y, WIDTH, HEIGHT);
-        g.setColor(c);
+        g.drawImage(bullImg, x, y, null);
         move();
     }
 
@@ -81,5 +80,19 @@ public class Bullet {
 
     public void setDir(Dir dir) {
         this.dir = dir;
+        switch (dir) {
+            case LEFT: setBullImg(ResourceMgr.bullL);break;
+            case UP: setBullImg(ResourceMgr.bullU);break;
+            case RIGHT: setBullImg(ResourceMgr.bullR);break;
+            case DOWN: setBullImg(ResourceMgr.bullD);break;
+        }
+    }
+
+    public static BufferedImage getBullImg() {
+        return bullImg;
+    }
+
+    public static void setBullImg(BufferedImage bullImg) {
+        Bullet.bullImg = bullImg;
     }
 }
