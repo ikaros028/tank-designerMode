@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
  * 将坦克对象单独封装
  */
 public class Tank {
+    public final static int WIDTH = ResourceMgr.tankD.getWidth();
+    public final static int HEIGHT = ResourceMgr.tankD.getHeight();
     private int x, y;
     private Dir dir = Dir.DOWN;
     private BufferedImage tankImg = null;
@@ -51,8 +53,8 @@ public class Tank {
         }
     }
 
-    public Bullet fire() {
-        return new Bullet(this.x, this.y, this.dir);
+    public Bullet fire(int x, int y) {
+        return new Bullet(x, y, this.dir);
     }
     public int getX() {
         return x;

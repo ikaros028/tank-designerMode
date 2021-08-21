@@ -8,10 +8,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Bullet {
+    public static final int WIDTH = ResourceMgr.bullD.getWidth();
+    public static final int HEIGHT = ResourceMgr.bullD.getHeight();
     private static final int SPEED = 20;
-    private static final int WIDTH = 5;
-    private static final int HEIGHT = 5;
-    private static BufferedImage bullImg = null;
+    private BufferedImage bullImg = null;
     private TankFrame tf = null;
     private boolean live = true;
     private int x,y;
@@ -88,11 +88,11 @@ public class Bullet {
         }
     }
 
-    public static BufferedImage getBullImg() {
+    public BufferedImage getBullImg() {
         return bullImg;
     }
 
-    public static void setBullImg(BufferedImage bullImg) {
-        Bullet.bullImg = bullImg;
+    public void setBullImg(BufferedImage bullImg) {
+        this.bullImg = bullImg;
     }
 }

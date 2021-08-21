@@ -78,7 +78,6 @@ public class TankFrame extends Frame {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
         g.drawString(" 子弹的数量：" + bullets.size(), 10, 60);
-        System.out.println("打印台：中文乱码");
         g.setColor(c);
         tank.paint(g);
         for (int i = 0; i < bullets.size(); i++) {
@@ -146,7 +145,7 @@ public class TankFrame extends Frame {
                     down = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    bullets.add(tank.fire());
+                    bullets.add(tank.fire(tank.getX() + Tank.WIDTH/2 - Bullet.WIDTH/2, tank.getY() + Tank.HEIGHT/2 - Bullet.HEIGHT/2));
                     break;
                 default:
                     break;
