@@ -7,6 +7,10 @@ public class U_Frame {
         TankFrame user_T = new TankFrame();
         user_T.setVisible(true);
 
+        // 初始化敌方坦克
+        for (int i = 0; i < TankFrame.LEVEL; i++) {
+            user_T.addEnemy(50 + i*50, 200);
+        }
         // 通过循环调用，产生自动变化
         while (true) {
             // 线程停歇100ms

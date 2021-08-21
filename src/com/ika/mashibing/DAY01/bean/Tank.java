@@ -18,6 +18,7 @@ public class Tank {
     private BufferedImage tankImg = null;
     private static final int SPEED = 5;
     private boolean moving = false;
+    private boolean live = true;
 
     public Tank(int x, int y, Dir dir) {
         super();
@@ -102,4 +103,10 @@ public class Tank {
         this.moving = moving;
     }
 
+    public boolean isLive() {
+        return live;
+    }
+    public void setLive(boolean live) {
+        this.live = live;
+    }
 }

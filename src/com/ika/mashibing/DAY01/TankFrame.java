@@ -8,16 +8,20 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 坦克大战游戏界面，包含全部的游戏元素：主角坦克、敌人坦克、子弹
+ */
 public class TankFrame extends Frame {
     private int x;
     private int y;
     public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    public final static int LEVEL = 3;
     List<Bullet> bullets = new ArrayList<Bullet>();
-    Tank tank = new Tank(200,200, Dir.DOWN);
+    List<Tank> enemies = new ArrayList<Tank>();
+    Tank tank = new Tank(200,400, Dir.UP);
 
     // 通过开关，允许同时执行开事件
     /** 左移开关 */
@@ -87,7 +91,13 @@ public class TankFrame extends Frame {
                 bullets.remove(i);
             }
         }
-
+        for (int i = 0; i < enemies.size(); i++) {
+            if (enemies.get(i).isLive()) {
+                enemies.get(i).paint(g);
+            } else {
+                enemies.remove(i);
+            }
+        }
     }
 
     /**
@@ -197,5 +207,12 @@ public class TankFrame extends Frame {
         }
         // 调用重绘方法，由重绘方法调用paint
         repaint();
+    }
+
+    public void addEnemy (int x, int y) {
+        addEnemy(x, y, Dir.DOWN);
+    }
+    public void addEnemy (int x, int y, Dir dir) {
+        enemies.add(new Tank(x, y, dir));
     }
 }
