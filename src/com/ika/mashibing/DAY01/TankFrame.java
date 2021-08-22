@@ -21,7 +21,7 @@ public class TankFrame extends Frame {
     public final static int LEVEL = 3;
     List<Bullet> bullets = new ArrayList<Bullet>();
     List<Tank> enemies = new ArrayList<Tank>();
-    Tank tank = new Tank(200,400, Dir.UP);
+    Tank tank = new Tank(200,400, Dir.UP, Group.GOOD);
 
     // 通过开关，允许同时执行开事件
     /** 左移开关 */
@@ -100,8 +100,12 @@ public class TankFrame extends Frame {
             }
         }
         for (int i = 0; i < enemies.size(); i++) {
-            if (enemies.get(i).isLive()) {
-                enemies.get(i).paint(g);
+            Tank en = enemies.get(i);
+            if (en.isLive()) {
+                en.paint(g);
+                if (en.isFire()) {
+                    bullets.add(en.fire(en.getX() + Tank.WIDTH/2 - Bullet.WIDTH/2, en.getY() + Tank.HEIGHT/2 - Bullet.HEIGHT/2));
+                }
             } else {
                 enemies.remove(i);
             }
@@ -237,6 +241,6 @@ public class TankFrame extends Frame {
         addEnemy(x, y, Dir.DOWN);
     }
     public void addEnemy (int x, int y, Dir dir) {
-        enemies.add(new Tank(x, y, dir));
+        enemies.add(new Tank(x, y, dir, Group.BAD));
     }
 }

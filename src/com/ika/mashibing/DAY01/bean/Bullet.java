@@ -1,26 +1,27 @@
 package com.ika.mashibing.DAY01.bean;
 
 import com.ika.mashibing.DAY01.Dir;
+import com.ika.mashibing.DAY01.Group;
 import com.ika.mashibing.DAY01.ResourceMgr;
 import com.ika.mashibing.DAY01.TankFrame;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.text.SimpleDateFormat;
 
 public class Bullet {
     public static final int WIDTH = ResourceMgr.bullD.getWidth();
     public static final int HEIGHT = ResourceMgr.bullD.getHeight();
     private static final int SPEED = 20;
     private BufferedImage bullImg = null;
-    private TankFrame tf = null;
     private boolean live = true;
     private int x,y;
     private Dir dir;
+    private Group group;
 
-    public Bullet(int x, int y, Dir dir) {
+    public Bullet(int x, int y, Dir dir, Group gr) {
         this.x = x;
         this.y = y;
+        this.group = gr;
         setDir(dir);
     }
 
@@ -97,4 +98,11 @@ public class Bullet {
         this.bullImg = bullImg;
     }
 
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 }
