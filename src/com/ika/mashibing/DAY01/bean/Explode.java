@@ -1,5 +1,6 @@
 package com.ika.mashibing.DAY01.bean;
 
+import com.ika.mashibing.DAY01.Audio;
 import com.ika.mashibing.DAY01.ResourceMgr;
 
 import java.awt.*;
@@ -15,6 +16,7 @@ public class Explode {
     public Explode(int x, int y) {
         this.x = x;
         this.y = y;
+        new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
 
     public void paint(Graphics g) {
