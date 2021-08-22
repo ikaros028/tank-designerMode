@@ -17,7 +17,7 @@ public class Tank {
     private Dir dir = Dir.DOWN;
     private BufferedImage tankImg = null;
     private static final int SPEED = 5;
-    private boolean moving = false;
+    private boolean moving = true;
     private boolean live = true;
 
     public Tank(int x, int y, Dir dir) {
@@ -108,5 +108,32 @@ public class Tank {
     }
     public void setLive(boolean live) {
         this.live = live;
+    }
+
+    /**
+     * 判断坦克是否相撞，若重叠则设置对象消亡
+     * @param tank
+     */
+    public void colideWith(Tank tank) {
+        // 新建矩形，判断矩形是否重叠
+        Rectangle rectThis = new Rectangle(x, y, WIDTH, HEIGHT);
+        Rectangle rectSpecified = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+        if (rectThis.intersects(rectSpecified)) {
+            setLive(false);
+            tank.setLive(false);
+        }
+    }
+    /**
+     * 判断子弹是否相撞，若重叠则设置对象消亡
+     * @param bullet
+     */
+    public void colideWith(Bullet bullet) {
+        // 新建矩形，判断矩形是否重叠
+        Rectangle rectThis = new Rectangle(x, y, WIDTH, HEIGHT);
+        Rectangle rectSpecified = new Rectangle(bullet.getX(), bullet.getY(), Bullet.WIDTH, Bullet.HEIGHT);
+        if (rectThis.intersects(rectSpecified)) {
+            setLive(false);
+            bullet.setLive(false);
+        }
     }
 }

@@ -82,9 +82,16 @@ public class TankFrame extends Frame {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
         g.drawString(" 子弹的数量：" + bullets.size(), 10, 60);
-        g.drawString(" 敌军的数量：" + enemies.size(), 10, 120);
+        g.drawString(" 敌军的数量：" + enemies.size(), 10, 80);
         g.setColor(c);
-        tank.paint(g);
+        if (tank.isLive()) {
+            tank.paint(g);
+        } else {
+            g.setColor(Color.RED);
+            g.drawString(" 游戏结束！！ ", 10, 100);
+            g.setColor(c);
+            return;
+        }
         for (int i = 0; i < bullets.size(); i++) {
             if (bullets.get(i).isLive()) {
                 bullets.get(i).paint(g);
@@ -100,10 +107,20 @@ public class TankFrame extends Frame {
             }
         }
         // 判断碰撞
-        for (int i = 0; i < bullets.size(); i++) {
-            for (int j = 0; j < enemies.size(); j++) {
-                bullets.get(i).colideWith(enemies.get(j));
+        for (int i = 0; i < enemies.size(); i++) {
+            // 坦克与子弹
+            for (int j = 0; j < bullets.size(); j++) {
+                enemies.get(i).colideWith(bullets.get(j));
             }
+//            // 坦克与坦克（友伤）
+//            for (int j = 0; j < enemies.size(); j++) {
+//                if (i == j) {
+//                    continue;
+//                }
+//                enemies.get(i).colideWith(enemies.get(j));
+//            }
+            // 坦克与主坦
+            enemies.get(i).colideWith(tank);
         }
     }
 
