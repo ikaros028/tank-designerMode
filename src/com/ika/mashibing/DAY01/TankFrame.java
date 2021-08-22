@@ -87,10 +87,17 @@ public class TankFrame extends Frame {
         if (tank.isLive()) {
             tank.paint(g);
         } else {
-            g.setColor(Color.RED);
-            g.drawString(" 游戏结束！！ ", 10, 100);
-            g.setColor(c);
-            return;
+            if (tank.getBoom() == null) {
+                tank.addBoom();
+            }
+            if (tank.getBoom().isLive()) {
+                tank.getBoom().paint(g);
+            } else {
+                g.setColor(Color.RED);
+                g.drawString(" 游戏结束！！ ", 10, 100);
+                g.setColor(c);
+                return;
+            }
         }
         for (int i = 0; i < bullets.size(); i++) {
             if (bullets.get(i).isLive()) {
@@ -107,7 +114,14 @@ public class TankFrame extends Frame {
                     bullets.add(en.fire(en.getX() + Tank.WIDTH/2 - Bullet.WIDTH/2, en.getY() + Tank.HEIGHT/2 - Bullet.HEIGHT/2));
                 }
             } else {
-                enemies.remove(i);
+                if (en.getBoom() == null) {
+                    en.addBoom();
+                }
+                if (en.getBoom().isLive()) {
+                    en.getBoom().paint(g);
+                } else {
+                    enemies.remove(i);
+                }
             }
         }
         // 判断碰撞

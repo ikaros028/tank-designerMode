@@ -18,6 +18,7 @@ public class Tank {
     private int x, y;
     private Dir dir = Dir.DOWN;
     private BufferedImage tankImg = null;
+    private Explode boom;
     private static final int SPEED = 5;
     private boolean moving = true;
     private boolean live = true;
@@ -142,6 +143,7 @@ public class Tank {
     public boolean isLive() {
         return live;
     }
+
     public void setLive(boolean live) {
         this.live = live;
     }
@@ -152,5 +154,13 @@ public class Tank {
 
     public void setFire(boolean fire) {
         this.fire = fire;
+    }
+
+    public Explode getBoom() {
+        return this.boom;
+    }
+
+    public void addBoom() {
+        this.boom = new Explode(x, y);
     }
 }
