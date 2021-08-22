@@ -1,4 +1,4 @@
-package com.ika.mashibing.DAY01;
+package com.ika.mashibing;
 
 public class U_Frame {
 

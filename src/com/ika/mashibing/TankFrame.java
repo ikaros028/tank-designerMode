@@ -1,7 +1,7 @@
-package com.ika.mashibing.DAY01;
+package com.ika.mashibing;
 
-import com.ika.mashibing.DAY01.bean.Bullet;
-import com.ika.mashibing.DAY01.bean.Tank;
+import com.ika.mashibing.bean.Bullet;
+import com.ika.mashibing.bean.Tank;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;

@@ -1,4 +1,4 @@
-package com.ika.mashibing.DAY01;
+package com.ika.mashibing;
 
 /**
  * tank方向枚举

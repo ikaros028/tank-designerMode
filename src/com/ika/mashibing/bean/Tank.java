@@ -1,10 +1,9 @@
-package com.ika.mashibing.DAY01.bean;
+package com.ika.mashibing.bean;
 
-import com.ika.mashibing.DAY01.Dir;
-import com.ika.mashibing.DAY01.Group;
-import com.ika.mashibing.DAY01.ResourceMgr;
+import com.ika.mashibing.Dir;
+import com.ika.mashibing.Group;
+import com.ika.mashibing.ResourceMgr;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package com.ika.mashibing.DAY01;
+package com.ika.mashibing;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

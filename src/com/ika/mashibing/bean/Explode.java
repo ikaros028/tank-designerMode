@@ -1,7 +1,7 @@
-package com.ika.mashibing.DAY01.bean;
+package com.ika.mashibing.bean;
 
-import com.ika.mashibing.DAY01.Audio;
-import com.ika.mashibing.DAY01.ResourceMgr;
+import com.ika.mashibing.Audio;
+import com.ika.mashibing.ResourceMgr;
 
 import java.awt.*;
 
