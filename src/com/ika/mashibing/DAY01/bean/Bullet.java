@@ -6,6 +6,7 @@ import com.ika.mashibing.DAY01.TankFrame;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.text.SimpleDateFormat;
 
 public class Bullet {
     public static final int WIDTH = ResourceMgr.bullD.getWidth();
@@ -50,6 +51,29 @@ public class Bullet {
         }
     }
 
+    public void setDir(Dir dir) {
+        this.dir = dir;
+        switch (dir) {
+            case LEFT: setBullImg(ResourceMgr.bullL);break;
+            case UP: setBullImg(ResourceMgr.bullU);break;
+            case RIGHT: setBullImg(ResourceMgr.bullR);break;
+            case DOWN: setBullImg(ResourceMgr.bullD);break;
+        }
+    }
+
+    /**
+     * 判断矩阵是否重叠，若重叠则设置对象消亡
+     * @param tank
+     */
+    public void colideWith(Tank tank) {
+        // 新建矩形，判断矩形是否重叠
+        Rectangle rectThis = new Rectangle(x, y, WIDTH, HEIGHT);
+        Rectangle rectSpecified = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+        if (rectThis.intersects(rectSpecified)) {
+            setLive(false);
+            tank.setLive(false);
+        }
+    }
     public boolean isLive() {
         return live;
     }
@@ -78,16 +102,6 @@ public class Bullet {
         return dir;
     }
 
-    public void setDir(Dir dir) {
-        this.dir = dir;
-        switch (dir) {
-            case LEFT: setBullImg(ResourceMgr.bullL);break;
-            case UP: setBullImg(ResourceMgr.bullU);break;
-            case RIGHT: setBullImg(ResourceMgr.bullR);break;
-            case DOWN: setBullImg(ResourceMgr.bullD);break;
-        }
-    }
-
     public BufferedImage getBullImg() {
         return bullImg;
     }
@@ -95,4 +109,5 @@ public class Bullet {
     public void setBullImg(BufferedImage bullImg) {
         this.bullImg = bullImg;
     }
+
 }
